@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Zima Blue",
   description: "Generate space wallpapers with the iconic Zima Blue rectangle",
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({

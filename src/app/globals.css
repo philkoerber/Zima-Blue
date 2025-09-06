@@ -3,11 +3,13 @@
 :root {
   --background: #000000;
   --foreground: #ffffff;
+  --zima-blue: #5BC2E7;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-zima-blue: var(--zima-blue);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
