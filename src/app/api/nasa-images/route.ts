@@ -1,6 +1,21 @@
 import { NextResponse } from 'next/server';
 import { nasaCache } from '@/lib/cache';
 
+interface NASAImagesResponse {
+    success: boolean;
+    images: string[];
+    source: string;
+    metadata: {
+        nasa_images_count: number;
+        apod_count: number;
+        mars_count: number;
+        earth_count: number;
+        total_returned: number;
+    };
+    timestamp: number;
+    cached: boolean;
+}
+
 interface APODResponse {
     date: string;
     explanation: string;
@@ -30,11 +45,6 @@ interface MarsRoverResponse {
     photos: MarsRoverPhoto[];
 }
 
-interface EarthImageryResponse {
-    date: string;
-    id: string;
-    url: string;
-}
 
 interface NASAImageResult {
     url: string;
@@ -183,7 +193,7 @@ export async function GET() {
 
         // Check cache first
         const cacheKey = 'nasa-images-combined';
-        const cachedResult = nasaCache.get(cacheKey);
+        const cachedResult = nasaCache.get<NASAImagesResponse>(cacheKey);
 
         if (cachedResult) {
             console.log('Returning cached NASA images');
