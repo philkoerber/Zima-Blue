@@ -10,7 +10,7 @@ export const useWallpaperGeneration = () => {
     const canvasRefs = useRef<(HTMLCanvasElement | null)[]>([]);
     const previewCanvasRefs = useRef<(HTMLCanvasElement | null)[]>([]);
 
-    const loadImageAsBlob = async (imageUrl: string): Promise<HTMLImageElement> => {
+    const loadImageAsBlob = useCallback(async (imageUrl: string): Promise<HTMLImageElement> => {
         try {
             // Fetch the image through our proxy API or directly
             let fetchUrl: string;
@@ -67,9 +67,9 @@ export const useWallpaperGeneration = () => {
                 img.src = objectUrl;
             });
         }
-    };
+    }, []);
 
-    const generatePreviewImage = async (
+    const generatePreviewImage = useCallback(async (
         index: number,
         img: HTMLImageElement,
         format: WallpaperFormat
@@ -122,9 +122,9 @@ export const useWallpaperGeneration = () => {
         }
 
         return dataUrl;
-    };
+    }, []);
 
-    const generateWallpaper = async (
+    const generateWallpaper = useCallback(async (
         index: number,
         format: WallpaperFormat,
         spaceImageSources: string[]
@@ -191,7 +191,7 @@ export const useWallpaperGeneration = () => {
             console.error('Error generating wallpaper:', error);
             throw new Error(`Failed to generate wallpaper: ${error}`);
         }
-    };
+    }, [loadImageAsBlob, generatePreviewImage]);
 
     const generateAllWallpapers = useCallback(async (
         format: WallpaperFormat,
@@ -226,7 +226,7 @@ export const useWallpaperGeneration = () => {
         } finally {
             setIsGenerating(false);
         }
-    }, []);
+    }, [generateWallpaper]);
 
     const downloadWallpaper = (dataUrl: string, index: number, format: WallpaperFormat) => {
         const link = document.createElement('a');
