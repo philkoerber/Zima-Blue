@@ -10,7 +10,7 @@ This guide will help you properly set up and test the NASA API integration for y
    - First Name
    - Last Name  
    - Email Address
-   - Application URL (optional - you can use `http://localhost:3000`)
+   - Application URL (optional - you can use `http://localhost:6666`)
 4. **Submit**: You'll receive your API key instantly via email
 
 ## 🔧 Step 2: Environment Setup
@@ -65,7 +65,7 @@ curl "https://api.nasa.gov/planetary/apod?api_key=YOUR_API_KEY"
 
 2. Visit your NASA images endpoint:
    ```
-   http://localhost:3000/api/nasa-images
+   http://localhost:6666/api/nasa-images
    ```
 
 3. Check the browser console and server logs for:
